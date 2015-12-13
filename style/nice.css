@@ -1,0 +1,72 @@
+
+@media screen and (max-device-aspect-ratio: 99/100) {
+    pre {
+        font-size: 170%;
+    }
+    table {
+        font-size: 150%;
+    }
+    .container {
+        font-size: 24px;
+        padding: 0 20px;
+    }
+}
+
+@media screen and (min-device-aspect-ratio: 100/99) {
+    .container {
+        max-width: 700px;
+        font-size: 20px;
+        padding: 0 10px;
+    }
+    pre {
+        font-size: 80%;
+    }
+}
+
+body {
+    font-family: {{font-body}};
+}
+
+.container {
+    margin: auto;
+    line-height: 1.4;
+    color: #444;
+}
+
+pre {
+    line-height: 110%;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    font-family: {{font-heading}};
+    line-height: 1.2;
+}
+
+tr:nth-child(even) {
+    background: #eee;
+}
+
+tr:nth-child(odd) {
+    background: #ddd;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    text-align: left;
+    background: #ccc;
+}
+
+th, td {
+    padding: 5px;
+}

@@ -1,0 +1,62 @@
+
+require:
+   quaint-google-fonts
+   path
+   fs
+
+stylesheet = fs.read-file-sync{path.join{__dirname, "../style/nice.css"}, .utf8}
+
+defaults = {
+   body = "sans"
+   heading = "sans"
+}
+
+install{@, options} =
+
+   fonts = defaults &
+      match options.fonts:
+         undefined? ->
+            {=}
+         String? font ->
+            {body = font}
+         font-list ->
+            {body = "sans", heading = "sans"} & font-list
+
+   var sheet = stylesheet
+   google-fonts = options.google-fonts or {}
+
+   items{fonts} each {location, _name} ->
+      name = match _name:
+         R"^g:([^:]+)(:.*)?"! {_, family, settings} ->
+            google-fonts.push{family + [settings or ""]}
+            family
+         else ->
+            _name
+      sheet = stylesheet.replace{"{{font-" + location + "}}", name}
+
+   quaint-google-fonts{@, fonts = google-fonts}
+
+   @register-resources with {
+      "style/nice.css" => {
+         path = null
+         contents = sheet
+         type = .css
+         method = .head
+      }
+   }
+
+   @register-resolvers with {
+      template = {
+         "@container" => "[template :: @minimal][.container % {body}]"
+      }
+   }
+
+
+main{*match} =
+   {@, options = {=}} when @is-quaint-engine ->
+      install{@, options}
+   {options = {=}} ->
+      {@} -> main{@, options}
+
+provide = main
+
