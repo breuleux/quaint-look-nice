@@ -8,16 +8,18 @@
     "url": "https://github.com/breuleux/quaint-look-nice"
   },
   "keywords": [
-      "quaint",
-      "quaint-plugin",
-      "css",
-      "stylesheet"
+    "quaint",
+    "quaint-plugin",
+    "css",
+    "stylesheet"
   ],
   "author": "Olivier Breuleux",
   "license": "MIT",
   "main": "./lib/index.js",
   "dependencies": {
+    "deepmerge": "^0.2.10",
     "earlgrey-runtime": ">=0.0.11",
+    "node-sass": "^3.4.2",
     "quaint-google-fonts": ">=0.0.0",
     "quaint-nav": ">=0.0.0"
   },

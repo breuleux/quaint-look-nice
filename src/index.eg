@@ -4,40 +4,83 @@ require:
    quaint-nav
    path
    fs
+   node-sass
+   deepmerge
 
-stylesheet = fs.read-file-sync{path.join{__dirname, "../style/nice.css"}, .utf8}
+common-sheet = fs.read-file-sync{path.join{__dirname, "../style/_common.sass"}, .utf8}
+main-sheet = fs.read-file-sync{path.join{__dirname, "../style/nice.sass"}, .utf8}
+nav-sheet = fs.read-file-sync{path.join{__dirname, "../style/nav.sass"}, .utf8}
 
 defaults = {
-   body = "sans"
-   heading = "sans"
+   fonts = {
+      body = "sans"
+      heading = null
+      nav = null
+   }
+   colors = {
+      body = null
+      nav = "#ff0"
+      pre = null
+      code = null
+      table = "#eee"
+      "table-header" = null
+
+      text = null
+      header = null
+      "nav-text" = null
+      "pre-text" = null
+      "code-text" = null
+      "table-text" = null
+      "table-header" = null
+      "header" = null
+   }
 }
 
-install{@, options} =
+install{@, _options} =
 
-   fonts = defaults &
-      match options.fonts:
-         undefined? ->
-            {=}
-         String? font ->
-            {body = font}
-         font-list ->
-            {body = "sans", heading = "sans"} & font-list
+   var sass-sheet = common-sheet + main-sheet;
 
-   var sheet = stylesheet
+   options = deepmerge{defaults, _options}
+   if options.font:
+      options.fonts.body = options.font
+   if options.use-nav:
+      sass-sheet += nav-sheet
+
+   variables = {
+      "use-nav" => options.use-nav
+   }
+
    google-fonts = options.google-fonts or {}
 
-   items{fonts} each {location, _name} ->
+   {.color, .size, .padding, .margin} each type ->
+      items{options['{type}s'] or {=}} each {location, value} ->
+         variables['{type}-{location}'] = value
+
+   items{options.fonts} each {location, _name} ->
       name = match _name:
          R"^g:([^:]+)(:.*)?"! {_, family, settings} ->
             google-fonts.push{family + [settings or ""]}
             family
          else ->
             _name
-      sheet = sheet.replace{"{{font-" + location + "}}", name}
-   sheet = sheet.replace{R.g"{{container}}"} with
-      if options.use-nav:
-         then: ".container"
-         else: "body"
+      variables['font-{location}'] = name
+
+   items{variables} each {name, match} ->
+      null? ->
+         delete variables[name]
+         sass-sheet = sass-sheet.replace{
+            new RegExp{'[^\\n].*\\${name}[^\\n]*(?=\\n)', "g"}
+            ""
+         }
+      else ->
+         pass
+
+   res = node-sass.render-sync{
+      data = varpfx.join{"\n"} + sass-sheet
+      indented-syntax = true
+   } where
+      varpfx = items{variables} each {k, v} -> '${k}: {v}'
+   sheet = res.css.to-string{}
 
    quaint-google-fonts{@, fonts = google-fonts}
    quaint-nav{@}
@@ -50,7 +93,6 @@ install{@, options} =
          method = .head
       }
    }
-
 
 main{*match} =
    {@, options = {=}} when @is-quaint-engine ->

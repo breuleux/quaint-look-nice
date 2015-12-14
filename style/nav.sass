@@ -1,0 +1,85 @@
+
+nav
+  background: $color-nav
+  color: tweak($color-body, 100%)
+  color: tweak($color-nav, 85%)
+  color: $color-nav-text
+  border-bottom: 2px solid tweak($color-nav, 50%)
+  font-family: $font-nav
+
+
+.nav-container
+    margin: auto
+    width: 720px
+
+.nav-container > ul
+  display: flex
+  flex-direction: row
+  list-style-type: none
+  margin: 0px
+  padding: 0px
+  font-size: 20px
+
+
+nav li
+  margin: 0px
+  display: flex
+  flex-direction: row
+
+nav li > *
+  padding: 5px 10px
+
+nav li.dropdown > :first-child
+  padding: 5px 10px
+
+nav li.dropdown > :first-child
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+  width: 100%
+
+nav li.dropdown > :first-child > .caret:after
+  content: "▾"
+  font-size: 16px
+  margin-left: 10px
+
+nav li.dropdown li.dropdown > :first-child > .caret:after
+  content: "▸"
+
+nav li.dropdown > *
+  padding: 0px
+
+nav li a
+  width: 100%
+  height: 100%
+  color: tweak($color-body, 100%)
+  color: tweak($color-nav, 85%)
+  color: $color-nav-text
+
+nav li a:hover
+  background-color: tweak($color-nav, 20%)
+  text-decoration: none
+
+nav .dropdown
+  position: relative
+
+nav .dropdown > ul
+  background: tweak($color-nav, 10%)
+  min-width: 200px
+  position: absolute
+  visibility: hidden
+  left: 0px
+  top: 100%
+  font-size: 20px
+
+nav .dropdown .dropdown > ul
+  top: 0px
+  left: 100%
+
+nav .dropdown:hover
+  background-color: tweak($color-nav, 20%)
+
+nav .dropdown:hover > ul
+  visibility: visible
+
