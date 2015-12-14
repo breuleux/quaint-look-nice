@@ -17,22 +17,33 @@ defaults = {
       heading = null
       nav = null
    }
-   colors = {
+   borders = {
+      nav = "2px solid darken($background-nav, 20%)"
+   }
+   widths = {
+      body = "700px"
+      nav = null
+   }
+   paddings = {
+      body = "10px"
+      nav = null
+   }
+   backgrounds = {
       body = null
-      nav = "#ff0"
+      nav = null
       pre = null
       code = null
       table = "#eee"
       "table-header" = null
-
-      text = null
-      header = null
-      "nav-text" = null
-      "pre-text" = null
-      "code-text" = null
-      "table-text" = null
+   }
+   colors = {
+      body = null
+      nav = null
+      pre = null
+      code = null
+      table = null
       "table-header" = null
-      "header" = null
+      header = null
    }
 }
 
@@ -52,7 +63,7 @@ install{@, _options} =
 
    google-fonts = options.google-fonts or {}
 
-   {.color, .size, .padding, .margin} each type ->
+   {.background, .color, .size, .border, .padding, .margin, .width} each type ->
       items{options['{type}s'] or {=}} each {location, value} ->
          variables['{type}-{location}'] = value
 

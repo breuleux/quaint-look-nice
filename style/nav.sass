@@ -3,86 +3,78 @@
 /* (this is why there are duplicate color: lines)
 
 nav
-  background: $color-nav
-  color: tweak($color-body, 100%)
-  color: tweak($color-nav, 85%)
-  color: $color-nav-text
-  border-bottom: 2px solid darken($color-nav, 20%)
+  background: $background-nav
+  color: tweak($background-body, 100%)
+  color: tweak($background-nav, 85%)
+  color: $color-nav
+  border-bottom: $border-nav
   font-family: $font-nav
 
-
-.nav-container
+  .nav-container
     margin: auto
-    width: 720px
+    width: $width-body
+    width: $width-nav
+    padding: 0 $padding-body
+    padding: 0 $padding-nav
+    > ul
+      display: flex
+      flex-direction: row
+      list-style-type: none
+      margin: 0px
+      padding: 0px
+      font-size: 20px
 
-.nav-container > ul
-  display: flex
-  flex-direction: row
-  list-style-type: none
-  margin: 0px
-  padding: 0px
-  font-size: 20px
+  li
+    margin: 0px
+    display: flex
+    flex-direction: row
+    > *
+      padding: 5px 10px
+    a
+      width: 100%
+      height: 100%
+      color: tweak($background-body, 100%)
+      color: tweak($background-nav, 85%)
+      color: $color-nav
+    a:hover
+      background-color: tweak($background-nav, 20%)
+      text-decoration: none
 
+  .dropdown
+    position: relative
 
-nav li
-  margin: 0px
-  display: flex
-  flex-direction: row
+    > *
+      padding: 0px
 
-nav li > *
-  padding: 5px 10px
+    > :first-child
+      padding: 5px 10px
+      display: flex
+      flex-direction: row
+      align-items: center
+      justify-content: space-between
+      width: 100%
+      > .caret:after
+        content: "▾"
+        font-size: 16px
+        margin-left: 10px
 
-nav li.dropdown > :first-child
-  padding: 5px 10px
+    .dropdown > :first-child > .caret:after
+      content: "▸"
 
-nav li.dropdown > :first-child
-  display: flex
-  flex-direction: row
-  align-items: center
-  justify-content: space-between
-  width: 100%
+    > ul
+      background: tweak($background-nav, 10%)
+      min-width: 200px
+      position: absolute
+      visibility: hidden
+      left: 0px
+      top: 100%
+      font-size: 20px
 
-nav li.dropdown > :first-child > .caret:after
-  content: "▾"
-  font-size: 16px
-  margin-left: 10px
+    .dropdown > ul
+      top: 0px
+      left: 100%
 
-nav li.dropdown li.dropdown > :first-child > .caret:after
-  content: "▸"
-
-nav li.dropdown > *
-  padding: 0px
-
-nav li a
-  width: 100%
-  height: 100%
-  color: tweak($color-body, 100%)
-  color: tweak($color-nav, 85%)
-  color: $color-nav-text
-
-nav li a:hover
-  background-color: tweak($color-nav, 20%)
-  text-decoration: none
-
-nav .dropdown
-  position: relative
-
-nav .dropdown > ul
-  background: tweak($color-nav, 10%)
-  min-width: 200px
-  position: absolute
-  visibility: hidden
-  left: 0px
-  top: 100%
-  font-size: 20px
-
-nav .dropdown .dropdown > ul
-  top: 0px
-  left: 100%
-
-nav .dropdown:hover
-  background-color: tweak($color-nav, 20%)
-
-nav .dropdown:hover > ul
-  visibility: visible
-
+  .dropdown:hover
+    background-color: tweak($background-nav, 20%)
+    > ul
+      visibility: visible

@@ -30,3 +30,5 @@ $brightness-divisor: $red-magic-number + $green-magic-number + $blue-magic-numbe
   @else
     @return lighten($color, $amount)
 
+@function bwtext($color)
+  @return tweak($color, 100%)

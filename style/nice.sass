@@ -20,12 +20,12 @@
 @media screen and (min-device-aspect-ratio: 100/99)
   @if $use-nav
     .container
-      max-width: 700px
-      padding: 0 10px
+      max-width: $width-body
+      padding: 0 $padding-body
   @else
     body
-      max-width: 700px
-      padding: 0 10px
+      max-width: $width-body
+      padding: 0 $padding-body
 
   body
     font-size: 20px
@@ -45,9 +45,9 @@ body
 body
   font-family: $font-body
   line-height: 1.4
-  background: $color-body
-  color: tweak($color-body, 85%)
-  color: $color-text
+  background: $background-body
+  color: tweak($background-body, 85%)
+  color: $color-body
 
 pre
   line-height: 110%
@@ -59,45 +59,45 @@ a:hover
   text-decoration: underline
 
 h1, h2, h3
-  color: tweak($color-body, 85%)
+  color: tweak($background-body, 85%)
   color: $color-header
   font-family: $font-heading
   line-height: 1.2
 
 tr:nth-child(even)
-  color: tweak($color-body, 100%)
-  color: tweak($color-table, 100%)
-  background: $color-table
+  color: tweak($background-body, 100%)
+  color: tweak($background-table, 100%)
+  background: $background-table
 
 tr:nth-child(odd)
-  color: tweak($color-body, 100%)
-  color: tweak($color-table, 100%)
-  background: tweak($color-table, 5%)
+  color: tweak($background-body, 100%)
+  color: tweak($background-table, 100%)
+  background: tweak($background-table, 5%)
 
 table
   width: 100%
 
 th
   text-align: left
-  color: tweak($color-body, 100%)
-  color: tweak(tweak($color-table, 20%), 100%)
-  color: tweak($color-table-header, 100%)
-  color: $color-table-text
-  color: $color-table-header-text
-  background: tweak($color-table, 20%)
-  background: $color-table-header
+  color: tweak($background-body, 100%)
+  color: tweak(tweak($background-table, 20%), 100%)
+  color: tweak($background-table-header, 100%)
+  color: $color-table
+  color: $color-table-header
+  background: tweak($background-table, 20%)
+  background: $background-table-header
 
 th, td
   padding: 5px
 
 pre
-  color: tweak($color-body, 100%)
-  color: tweak($color-pre, 100%)
-  color: $color-pre-text
-  background: $color-pre
+  color: tweak($background-body, 100%)
+  color: tweak($background-pre, 100%)
+  color: $color-pre
+  background: $background-pre
 
 code
-  color: tweak($color-body, 100%)
-  color: tweak($color-code, 100%)
-  color: $color-code-text
-  background: $color-code
+  color: tweak($background-body, 100%)
+  color: tweak($background-code, 100%)
+  color: $color-code
+  background: $background-code
