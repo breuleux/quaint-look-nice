@@ -1,4 +1,7 @@
 
+/* Lines with a variable that does not exist (set to null) will be erased
+/* (this is why there are duplicate color: lines)
+
 @media screen and (max-device-aspect-ratio: 99/100)
   pre
     font-size: 170%
@@ -77,7 +80,8 @@ table
 th
   text-align: left
   color: tweak($color-body, 100%)
-  color: tweak($color-table, 100%)
+  color: tweak(tweak($color-table, 20%), 100%)
+  color: tweak($color-table-header, 100%)
   color: $color-table-text
   color: $color-table-header-text
   background: tweak($color-table, 20%)

@@ -1,10 +1,13 @@
 
+/* Lines with a variable that does not exist (set to null) will be erased
+/* (this is why there are duplicate color: lines)
+
 nav
   background: $color-nav
   color: tweak($color-body, 100%)
   color: tweak($color-nav, 85%)
   color: $color-nav-text
-  border-bottom: 2px solid tweak($color-nav, 50%)
+  border-bottom: 2px solid darken($color-nav, 20%)
   font-family: $font-nav
 
 
