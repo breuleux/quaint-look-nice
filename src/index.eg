@@ -14,42 +14,61 @@ nav-sheet = fs.read-file-sync{path.join{__dirname, "../style/nav.sass"}, .utf8}
 defaults = {
    fonts = {
       body = "sans"
-      heading = null
-      nav = null
+      nav = "$font-body"
+      heading = "$font-body"
+      pre = "Monospace"
+      code = "$font-pre"
+   }
+   "font-sizes" = {
+      body = "20px"
+      nav = "$font-size-body"
+      dropdown = "$font-size-body"
+      caret = "$font-size-nav * 0.8"
    }
    borders = {
       nav = "2px solid darken($background-nav, 20%)"
    }
    widths = {
       body = "700px"
-      nav = null
+      nav = "$width-body + 2 * $padding-body"
    }
    paddings = {
       body = "10px"
-      nav = null
+      nav = "$padding-body"
+      td = "5px"
    }
    backgrounds = {
-      body = null
-      nav = null
-      pre = null
-      code = null
-      table = "#eee"
-      "table-header" = null
+      body = "#fff"
+      nav = "$background-body"
+      "nav-select" = "tweak($background-nav, 20%)"
+      "nav-dropdown" = "tweak($background-nav, 10%)"
+      "nav-dropdown-select" = "tweak($background-nav-dropdown, 10%)"
+      pre = "$background-body"
+      code = "$background-body"
+      table = "tweak($background-body, 10%)"
+      "table-odd" = "tweak($background-table, 5%)"
+      "table-header" = "tweak($background-table, 20%)"
    }
    colors = {
-      body = null
-      nav = null
-      pre = null
-      code = null
-      table = null
-      "table-header" = null
-      header = null
+      body = "tweak($background-body, 85%)"
+      nav = "bwtext($background-nav)"
+      "nav-select" = "bwtext($background-nav-select)"
+      "nav-dropdown" = "bwtext($background-nav-dropdown)"
+      "nav-dropdown-select" = "bwtext($background-nav-dropdown-select)"
+      link = "contrasting($background-body, #aaf, #00f)"
+      "link-visited" = "contrasting($background-body, #f8f, #808)"
+      pre = "bwtext($background-pre)"
+      code = "bwtext($background-code)"
+      table = "bwtext($background-table)"
+      "table-odd" = "bwtext($background-table-odd)"
+      "table-header" = "bwtext($background-table-header)"
+      header = "$color-body"
    }
 }
 
 install{@, _options} =
 
-   var sass-sheet = common-sheet + main-sheet;
+   var sass-sheet = main-sheet;
 
    options = deepmerge{defaults, _options}
    if options.font:
@@ -63,7 +82,8 @@ install{@, _options} =
 
    google-fonts = options.google-fonts or {}
 
-   {.background, .color, .size, .border, .padding, .margin, .width} each type ->
+   {.background, .color, "font-size"
+    .border, .padding, .margin, .width} each type ->
       items{options['{type}s'] or {=}} each {location, value} ->
          variables['{type}-{location}'] = value
 
@@ -76,18 +96,14 @@ install{@, _options} =
             _name
       variables['font-{location}'] = name
 
-   items{variables} each {name, match} ->
-      null? ->
-         delete variables[name]
-         sass-sheet = sass-sheet.replace{
-            new RegExp{'[^\\n].*\\${name}[^\\n]*(?=\\n)', "g"}
-            ""
-         }
-      else ->
-         pass
+   extra-sheet =
+      if options.extra:
+         @read-resource-text{.resource, options.extra}
+      else:
+         ""
 
    res = node-sass.render-sync{
-      data = varpfx.join{"\n"} + sass-sheet
+      data = common-sheet + varpfx.join{"\n"} + sass-sheet + extra-sheet
       indented-syntax = true
    } where
       varpfx = items{variables} each {k, v} -> '${k}: {v}'

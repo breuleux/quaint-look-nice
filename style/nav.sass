@@ -1,28 +1,35 @@
 
-/* Lines with a variable that does not exist (set to null) will be erased
-/* (this is why there are duplicate color: lines)
+/* @media screen and (min-device-aspect-ratio: 99/100)
+/*   nav
+/*     font-size: 100%
 
-nav
+@media screen and (min-device-aspect-ratio: 100/99)
+  .nav-main
+    width: $width-nav
+    padding: 0 $padding-nav
+
+nav, .nav
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+
+  width: 100%
   background: $background-nav
-  color: tweak($background-body, 100%)
-  color: tweak($background-nav, 85%)
   color: $color-nav
   border-bottom: $border-nav
   font-family: $font-nav
 
-  .nav-container
+  .nav-main
     margin: auto
-    width: $width-body
-    width: $width-nav
-    padding: 0 $padding-body
-    padding: 0 $padding-nav
+
+  .nav-main, .nav-leftmost, .nav-rightmost
     > ul
       display: flex
       flex-direction: row
       list-style-type: none
       margin: 0px
       padding: 0px
-      font-size: 20px
+      font-size: $font-size-nav
 
   li
     margin: 0px
@@ -33,15 +40,18 @@ nav
     a
       width: 100%
       height: 100%
-      color: tweak($background-body, 100%)
-      color: tweak($background-nav, 85%)
-      color: $color-nav
+      color: inherit
     a:hover
-      background-color: tweak($background-nav, 20%)
+      background-color: $background-nav-select
+      color: $color-nav-select
       text-decoration: none
 
   .dropdown
     position: relative
+
+    a:hover
+      background-color: $background-nav-dropdown-select
+      color: $color-nav-dropdown-select
 
     > *
       padding: 0px
@@ -55,26 +65,28 @@ nav
       width: 100%
       > .caret:after
         content: "▾"
-        font-size: 16px
+        font-size: $font-size-caret
         margin-left: 10px
 
     .dropdown > :first-child > .caret:after
       content: "▸"
 
     > ul
-      background: tweak($background-nav, 10%)
+      background-color: $background-nav-dropdown
+      color: $color-nav-dropdown
       min-width: 200px
       position: absolute
       visibility: hidden
       left: 0px
       top: 100%
-      font-size: 20px
+      font-size: $font-size-dropdown
 
     .dropdown > ul
       top: 0px
       left: 100%
 
   .dropdown:hover
-    background-color: tweak($background-nav, 20%)
+    background-color: $background-nav-dropdown-select
+    color: $color-nav-dropdown-select
     > ul
       visibility: visible

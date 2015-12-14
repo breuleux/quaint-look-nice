@@ -32,3 +32,9 @@ $brightness-divisor: $red-magic-number + $green-magic-number + $blue-magic-numbe
 
 @function bwtext($color)
   @return tweak($color, 100%)
+
+@function contrasting($color, $light, $dark)
+  @if brightness($color) > 65%
+    @return $dark
+  @else
+    @return $light

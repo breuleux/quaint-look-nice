@@ -1,7 +1,4 @@
 
-/* Lines with a variable that does not exist (set to null) will be erased
-/* (this is why there are duplicate color: lines)
-
 @media screen and (max-device-aspect-ratio: 99/100)
   pre
     font-size: 170%
@@ -14,8 +11,8 @@
     body
       padding: 0 20px
   body
-    font-size: 24px
-    padding: 0 20px
+    font-size: $font-size-body
+    padding: 0 $padding-body
 
 @media screen and (min-device-aspect-ratio: 100/99)
   @if $use-nav
@@ -28,7 +25,7 @@
       padding: 0 $padding-body
 
   body
-    font-size: 20px
+    font-size: $font-size-body
   pre
     font-size: 80%
 
@@ -44,60 +41,55 @@ body
 
 body
   font-family: $font-body
-  line-height: 1.4
+  line-height: 150%
   background: $background-body
-  color: tweak($background-body, 85%)
   color: $color-body
 
 pre
   line-height: 110%
 
 a
+  color: $color-link
   text-decoration: none
 
 a:hover
   text-decoration: underline
 
+a:visited
+  color: $color-link-visited
+
 h1, h2, h3
-  color: tweak($background-body, 85%)
   color: $color-header
   font-family: $font-heading
   line-height: 1.2
 
 tr:nth-child(even)
-  color: tweak($background-body, 100%)
-  color: tweak($background-table, 100%)
   background: $background-table
 
 tr:nth-child(odd)
-  color: tweak($background-body, 100%)
-  color: tweak($background-table, 100%)
-  background: tweak($background-table, 5%)
+  color: $color-table-odd
+  background: $background-table-odd
 
 table
+  border-collapse: collapse
+  color: $color-table
   width: 100%
 
 th
   text-align: left
-  color: tweak($background-body, 100%)
-  color: tweak(tweak($background-table, 20%), 100%)
-  color: tweak($background-table-header, 100%)
-  color: $color-table
   color: $color-table-header
-  background: tweak($background-table, 20%)
   background: $background-table-header
 
 th, td
-  padding: 5px
+  padding: $padding-td
 
 pre
-  color: tweak($background-body, 100%)
-  color: tweak($background-pre, 100%)
+  font: $font-pre
   color: $color-pre
   background: $background-pre
 
 code
-  color: tweak($background-body, 100%)
-  color: tweak($background-code, 100%)
+  font: $font-code
   color: $color-code
   background: $background-code
+
