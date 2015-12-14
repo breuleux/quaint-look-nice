@@ -1,6 +1,7 @@
 
 require:
    quaint-google-fonts
+   quaint-nav
    path
    fs
 
@@ -32,9 +33,14 @@ install{@, options} =
             family
          else ->
             _name
-      sheet = stylesheet.replace{"{{font-" + location + "}}", name}
+      sheet = sheet.replace{"{{font-" + location + "}}", name}
+   sheet = sheet.replace{R.g"{{container}}"} with
+      if options.use-nav:
+         then: ".container"
+         else: "body"
 
    quaint-google-fonts{@, fonts = google-fonts}
+   quaint-nav{@}
 
    @register-resources with {
       "style/nice.css" => {
@@ -42,12 +48,6 @@ install{@, options} =
          contents = sheet
          type = .css
          method = .head
-      }
-   }
-
-   @register-resolvers with {
-      template = {
-         "@container" => "[template :: @minimal][.container % {body}]"
       }
    }
 
