@@ -1,37 +1,4 @@
 
-@media screen and (max-device-aspect-ratio: 99/100)
-  pre
-    font-size: 170%
-  table
-    font-size: 150%
-  @if $use-nav
-    .container
-      padding: 0 20px
-  @else
-    body
-      padding: 0 20px
-  body
-    font-size: $font-size-body
-    padding: 0 $padding-body
-
-@media screen and (min-device-aspect-ratio: 100/99)
-  @if $use-nav
-    .container
-      max-width: $width-body
-      padding: 0 $padding-body
-  @else
-    body
-      max-width: $width-body
-      padding: 0 $padding-body
-
-  body
-    font-size: $font-size-body
-  pre
-    font-size: 80%
-
-body
-  margin: 0px
-
 @if $use-nav
   .container
     margin: auto
@@ -39,9 +6,13 @@ body
   body
     margin: auto
 
+html
+  font-size: $font-size-body
+
 body
+  margin: 0px
   font-family: $font-body
-  line-height: 150%
+  line-height: 1.5
   background: $background-body
   color: $color-body
 
@@ -58,10 +29,20 @@ a:hover
 a:visited
   color: $color-link-visited
 
-h1, h2, h3
+h1
+  font-family: $font-title
+  color: $color-title
+h2, h3
+  font-family: $font-header
   color: $color-header
-  font-family: $font-heading
   line-height: 1.2
+
+h1
+  font-size: 2rem
+h2
+  font-size: 1.5rem
+h3
+  font-size: 1.2rem
 
 tr:nth-child(even)
   background: $background-table
@@ -93,3 +74,42 @@ code
   color: $color-code
   background: $background-code
 
+
+
+/* DESKTOP
+
+@media screen and (min-device-aspect-ratio: 100/99)
+  @if $use-nav
+    .container
+      max-width: $width-body
+      padding: 0 $padding-body
+  @else
+    body
+      max-width: $width-body
+      padding: 0 $padding-body
+
+  body
+    font-size: $font-size-body
+  pre
+    font-size: 80%
+
+/* MOBILE
+
+@media screen and (max-device-aspect-ratio: 99/100)
+  pre
+    font-size: 1.7rem
+  table
+    font-size: 2rem
+  @if $use-nav
+    .container
+      padding: 0 50px
+  @else
+    body
+      padding: 0 50px
+    padding: 0 $padding-body
+  h1
+    font-size: 4rem
+  h2
+    font-size: 2.5rem
+  h3
+    font-size: 1.5rem

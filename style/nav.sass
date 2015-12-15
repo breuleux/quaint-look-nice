@@ -1,40 +1,24 @@
 
-/* @media screen and (min-device-aspect-ratio: 99/100)
-/*   nav
-/*     font-size: 100%
 
-@media screen and (min-device-aspect-ratio: 100/99)
-  .nav-main
-    width: $width-nav
-    padding: 0 $padding-nav
-
-nav, .nav
-  display: flex
-  flex-direction: row
-  justify-content: space-between
-
+nav.nav
+  @include row
   width: 100%
   background: $background-nav
   color: $color-nav
   border-bottom: $border-nav
   font-family: $font-nav
-
-  .nav-main
-    margin: auto
+  box-sizing: border-box
 
   .nav-main, .nav-leftmost, .nav-rightmost
     > ul
-      display: flex
-      flex-direction: row
+      @include row
       list-style-type: none
       margin: 0px
       padding: 0px
-      font-size: $font-size-nav
 
   li
+    @include row
     margin: 0px
-    display: flex
-    flex-direction: row
     > *
       padding: 5px 10px
     a
@@ -47,8 +31,6 @@ nav, .nav
       text-decoration: none
 
   .dropdown
-    position: relative
-
     a:hover
       background-color: $background-nav-dropdown-select
       color: $color-nav-dropdown-select
@@ -57,36 +39,156 @@ nav, .nav
       padding: 0px
 
     > :first-child
+      @include row
+      position: relative
       padding: 5px 10px
-      display: flex
-      flex-direction: row
       align-items: center
       justify-content: space-between
       width: 100%
+      box-sizing: border-box
       > .caret:after
         content: "▾"
-        font-size: $font-size-caret
-        margin-left: 10px
-
-    .dropdown > :first-child > .caret:after
-      content: "▸"
 
     > ul
       background-color: $background-nav-dropdown
       color: $color-nav-dropdown
+      border-left: $border-nav-dropdown
       min-width: 200px
-      position: absolute
-      visibility: hidden
-      left: 0px
-      top: 100%
       font-size: $font-size-dropdown
 
-    .dropdown > ul
-      top: 0px
-      left: 100%
 
-  .dropdown:hover
-    background-color: $background-nav-dropdown-select
-    color: $color-nav-dropdown-select
-    > ul
-      visibility: visible
+
+/* HAMBURGER HMMMMMMM
+
+.hamburger
+  @include column
+  justify-content: space-between
+
+.icon-bar
+  display: block
+  background-color: bwtext($background-nav)
+
+
+
+/* DESKTOP
+
+@media screen and (min-device-aspect-ratio: 100/99)
+  nav.nav
+    font-size: $font-size-nav
+    justify-content: space-between
+
+    .nav-main
+      margin: auto
+
+    .dropdown
+      position: relative
+
+      > :first-child
+        > .caret:after
+          font-size: $font-size-caret
+          margin-left: 10px
+
+      .dropdown > :first-child > .caret:after
+        content: "▸"
+
+      > ul
+        position: absolute
+        visibility: hidden
+        left: 0px
+        top: 100%
+
+      .dropdown > ul
+        top: 0px
+        left: 100%
+
+    .dropdown:hover
+      background-color: $background-nav-dropdown-select
+      color: $color-nav-dropdown-select
+      > ul
+        visibility: visible
+
+  .nav-main
+    width: $width-nav
+
+  .hamburger
+    display: none
+    padding: 10px
+
+  .icon-bar
+    width: 22px
+    height: 2px
+    border-radius: 1px
+
+
+/* MOBILE
+
+@media screen and (max-device-aspect-ratio: 99/100)
+  nav.nav
+    font-size: $font-size-nav * 3
+    position: relative
+
+    .active, .nav-main
+      background-color: $background-nav-dropdown-select
+      color: $color-nav-dropdown-select
+      .icon-bar
+        background-color: bwtext($background-nav-dropdown-select)
+
+    .nav-main
+      @include column
+      @include height-out
+      position: absolute
+      left: 0px
+      top: 100%
+      width: 100%
+      /* display: none
+      overflow: hidden
+      box-sizing: border-box
+
+      > ul
+        @include column
+        list-style-type: none
+        margin: 0px
+        padding: 0px
+        box-sizing: border-box
+
+    .nav-main.active
+      @include height-in(2000px)
+
+    li
+      a:hover
+        background-color: $background-nav-dropdown-select
+
+    .dropdown
+      @include column
+      position: relative
+      overflow: hidden
+
+      > :first-child
+        > .caret:after
+          position: absolute
+          top: 5px
+          right: 20px
+          font-size: $font-size-caret * 4
+          margin: 0 10px
+
+      > ul
+        @include height-out
+        font-size: $font-size-dropdown * 3
+        /* display: none
+        padding-left: 40px
+
+    .dropdown.active
+      > ul
+        @include height-in(1000px)
+        display: block
+      > :first-child
+        > .caret:after
+          content: "▴"
+
+  .hamburger
+    padding: 25px
+
+  .icon-bar
+    width: 50px
+    height: 5px
+    border-radius: 2px

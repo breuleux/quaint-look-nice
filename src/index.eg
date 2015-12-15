@@ -15,7 +15,8 @@ defaults = {
    fonts = {
       body = "sans"
       nav = "$font-body"
-      heading = "$font-body"
+      header = "$font-body"
+      title = "$font-header"
       pre = "Monospace"
       code = "$font-pre"
    }
@@ -27,6 +28,7 @@ defaults = {
    }
    borders = {
       nav = "2px solid darken($background-nav, 20%)"
+      "nav-dropdown" = "10px solid $background-nav-dropdown"
    }
    widths = {
       body = "700px"
@@ -63,6 +65,7 @@ defaults = {
       "table-odd" = "bwtext($background-table-odd)"
       "table-header" = "bwtext($background-table-header)"
       header = "$color-body"
+      title = "$color-header"
    }
 }
 
