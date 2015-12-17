@@ -6,6 +6,8 @@ require:
    fs
    node-sass
    deepmerge
+   postcss
+   autoprefixer
 
 common-sheet = fs.read-file-sync{path.join{__dirname, "../style/_common.sass"}, .utf8}
 main-sheet = fs.read-file-sync{path.join{__dirname, "../style/nice.sass"}, .utf8}
@@ -110,7 +112,8 @@ install{@, _options} =
       indented-syntax = true
    } where
       varpfx = items{variables} each {k, v} -> '${k}: {v}'
-   sheet = res.css.to-string{}
+
+   sheet = postcss{{autoprefixer}}.process{res.css.to-string{}}.css
 
    quaint-google-fonts{@, fonts = google-fonts}
    quaint-nav{@}
