@@ -9,9 +9,10 @@ require:
    postcss
    autoprefixer
 
-common-sheet = fs.read-file-sync{path.join{__dirname, "../style/_common.sass"}, .utf8}
-main-sheet = fs.read-file-sync{path.join{__dirname, "../style/nice.sass"}, .utf8}
-nav-sheet = fs.read-file-sync{path.join{__dirname, "../style/nav.sass"}, .utf8}
+style-root = path.join{__dirname, "../style"}
+common-sheet = fs.read-file-sync{path.join{style-root, "_common.sass"}, .utf8}
+main-sheet = fs.read-file-sync{path.join{style-root, "nice.sass"}, .utf8}
+nav-sheet = fs.read-file-sync{path.join{style-root, "nav.sass"}, .utf8}
 
 defaults = {
    fonts = {
