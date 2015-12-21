@@ -60,9 +60,10 @@ $brightness-divisor: $red-magic-number + $green-magic-number + $blue-magic-numbe
 
 @mixin height-in($w)
   max-height: $w
-  overflow: hidden
+  overflow-y: auto
   transition: max-height 0.25s ease-in;
 
 @mixin height-out
   max-height: 0px
+  overflow: hidden
   transition: max-height 0.25s ease-out;

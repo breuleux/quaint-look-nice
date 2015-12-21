@@ -14,6 +14,12 @@ common-sheet = fs.read-file-sync{path.join{style-root, "_common.sass"}, .utf8}
 main-sheet = fs.read-file-sync{path.join{style-root, "nice.sass"}, .utf8}
 nav-sheet = fs.read-file-sync{path.join{style-root, "nav.sass"}, .utf8}
 
+nav-template = """
+template :: @minimal
+lnnav :: dump!
+.container % {body}
+"""
+
 defaults = {
    fonts = {
       body = "sans"
@@ -126,7 +132,49 @@ install{@, _options} =
          type = .css
          method = .head
       }
+      "js/nav.js" => {
+         path = path.join{__dirname, "../client/nav.js"}
+         contents = true
+         type = .js
+         method = .head
+      }
+      "js/nav.js/install" => {
+         path = null
+         contents = "$$quaintNavFunctionality()"
+         type = .js
+         method = .body
+         inline = true
+      }
    }
+
+   @register-resolvers with {
+      template = {
+         "@nav" => nav-template
+      }
+   }
+
+   @register-macros with {
+      lnnav{engine, body} =
+         if body.raw{}.trim{} !== "dump!":
+            throw E.quaint-look-nice with
+               'lnnav:: macro can only have "dump!" as its body'
+         {
+            .nav-container-desktop %
+               quaint-nav.dump-nav{engine, "leftmost"}
+               quaint-nav.dump-nav{engine, "main"}
+               quaint-nav.dump-nav{engine, "rightmost"}
+            .nav-container-mobile %
+               nav.nav-mobile-menu.dropdown %
+                  .hamburger %
+                     span.icon-bar %
+                     span.icon-bar %
+                     span.icon-bar %
+                  quaint-nav.dump-nav{engine, "mobile-menu", ulonly = true}
+               quaint-nav.dump-nav{engine, "mobile"}
+         }
+   }
+
+
 
 main{*match} =
    {@, options = {=}} when @is-quaint-engine ->
