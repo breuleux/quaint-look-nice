@@ -54,6 +54,8 @@
       color: $color-nav-dropdown
       /* border-left: $border-nav-dropdown
       min-width: 200px
+      /* max-height: 500px
+      /* overflow-y: auto
       font-size: $font-size-dropdown
 
 
@@ -112,18 +114,14 @@
   .nav-main
     width: $width-nav
 
-  .hamburger
-    /* display: none
-    padding: 10px
+  /* .hamburger
+  /*   display: none
+  /*   padding: 10px
 
-  .icon-bar
-    width: 22px
-    height: 2px
-    border-radius: 1px
-
-@media screen and (min-device-aspect-ratio: 100/99)
-  .nav-container-desktop
-    display: none
+  /* .icon-bar
+  /*   width: 22px
+  /*   height: 2px
+  /*   border-radius: 1px
 
 
 
@@ -164,9 +162,13 @@
     transition: background-color 0.5s cubic-bezier(1,0,.8,0), color 0.5s cubic-bezier(1,0,.8,0)
 
     > :first-child
+      position: relative
       > .caret:after
-        font-size: $font-size-caret * 3
+        position: absolute
+        font-size: $font-size-caret * 5
         margin-left: 10px
+        right: 10px
+        top: -20px
 
     .dropdown > :first-child > .caret:after
       content: "▾"
@@ -382,3 +384,6 @@
 
 
 
+@media screen and (min-device-aspect-ratio: 100/99)
+  .nav-container-mobile
+    display: none
