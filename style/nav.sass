@@ -15,46 +15,6 @@
     margin: 0px
     padding: 0px
 
-.nav-container-desktop nav
-  li
-    @include row
-    margin: 0px
-    > *
-      padding: 5px 10px
-    a
-      width: 100%
-      height: 100%
-      color: inherit
-    a:hover
-      background-color: $background-nav-select
-      color: $color-nav-select
-      text-decoration: none
-
-  .dropdown
-    a:hover
-      background-color: $background-nav-dropdown-select
-      color: $color-nav-dropdown-select
-
-    > *
-      padding: 0px
-
-    > :first-child
-      @include row
-      position: relative
-      padding: 5px 10px
-      align-items: center
-      justify-content: space-between
-      width: 100%
-      box-sizing: border-box
-      > .caret:after
-        content: "▾"
-
-    > ul
-      background-color: $background-nav-dropdown
-      color: $color-nav-dropdown
-      min-width: 200px
-      font-size: $font-size-dropdown
-
 
 
 /* HAMBURGER HMMMMMMM
@@ -77,6 +37,46 @@
   font-size: $font-size-nav
   justify-content: space-between
 
+  nav
+    li
+      @include row
+      margin: 0px
+      > *
+        padding: 5px 10px
+      a
+        width: 100%
+        height: 100%
+        color: inherit
+      a:hover
+        background-color: $background-nav-select
+        color: $color-nav-select
+        text-decoration: none
+
+    .dropdown
+      a:hover
+        background-color: $background-nav-dropdown-select
+        color: $color-nav-dropdown-select
+
+      > *
+        padding: 0px
+
+      > :first-child
+        @include row
+        position: relative
+        padding: 5px 10px
+        align-items: center
+        justify-content: space-between
+        width: 100%
+        box-sizing: border-box
+        > .caret:after
+          content: "▾"
+
+      > ul
+        background-color: $background-nav-dropdown
+        color: $color-nav-dropdown
+        min-width: 200px
+        font-size: $font-size-dropdown
+
   .nav-main
     margin: auto
 
@@ -93,10 +93,10 @@
 
     > ul
       position: absolute
-      visibility: hidden
       left: 0px
       top: 100%
       z-index: 10000
+      @include opacity-out
 
     .dropdown > ul
       top: 0px
@@ -105,8 +105,9 @@
   .dropdown:hover
     background-color: $background-nav-dropdown-select
     color: $color-nav-dropdown-select
+
     > ul
-      visibility: visible
+      @include opacity-in
 
   .nav-main
     width: $width-nav
@@ -138,11 +139,20 @@
       position: absolute
       top: 100%
       width: 100vw
+      z-index: 10001
+    > .dropdown-spacer
+      position: absolute
+      top: 100%
+      width: 100vw
+      height: 100vh
+      background: green
+      opacity: 0.5
+      z-index: 10000
 
   .dropdown
 
     background: $background-nav
-    transition: background-color 0.5s cubic-bezier(1,0,.8,0), color 0.5s cubic-bezier(1,0,.8,0)
+    @include bgcolor-out
 
     > :first-child
       position: relative
@@ -158,6 +168,9 @@
 
     .dropdown.active > :first-child > .caret:after
       content: "▴"
+
+    > .dropdown-spacer
+      visibility: hidden
 
     > ul
       @include height-out
@@ -181,12 +194,14 @@
 
   .dropdown.active
     background-color: $background-nav-dropdown-select
-    transition: background-color 0.5s cubic-bezier(0,1,.2,1), color 0.5s cubic-bezier(0,1,.2,1)
+    @include bgcolor-in
     color: $color-nav-dropdown-select
     .icon-bar
       background-color: bwtext($background-nav-dropdown-select)
     > ul
       @include height-in(2500px)
+    > .dropdown-spacer
+      visibility: visible
 
 
 
