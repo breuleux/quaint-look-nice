@@ -9,10 +9,29 @@ require:
    postcss
    autoprefixer
 
-style-root = path.join{__dirname, "../style"}
-common-sheet = fs.read-file-sync{path.join{style-root, "_common.sass"}, .utf8}
-main-sheet = fs.read-file-sync{path.join{style-root, "nice.sass"}, .utf8}
-nav-sheet = fs.read-file-sync{path.join{style-root, "nav.sass"}, .utf8}
+
+read-sheets{@, options} =
+   if options._sheets:
+      options
+   else:
+      read-file = options.read-file or [[@] and [x -> @read-resource-text{.resource, x}]]
+      style-root = path.join{__dirname, "../style"}
+      if read-file:
+         options & {
+            _sheets = {
+               common = read-file{path.join{style-root, "_common.sass"}}
+               main = read-file{path.join{style-root, "nice.sass"}}
+               nav = read-file{path.join{style-root, "nav.sass"}}
+               extra =
+                  if options.extra as x:
+                     read-file{x}
+                  else:
+                     ""
+            }
+         }
+      else:
+         options
+
 
 nav-template = """
 template :: @minimal
@@ -80,13 +99,16 @@ defaults = {
 
 install{@, _options} =
 
-   var sass-sheet = main-sheet;
 
-   options = deepmerge{defaults, _options}
+   options = read-sheets{@, deepmerge{defaults, _options}}
+   sheets = options._sheets
+   var sass-sheet = sheets.main
+
    if options.font:
       options.fonts.body = options.font
+
    if options.use-nav:
-      sass-sheet += nav-sheet
+      sass-sheet += sheets.nav
 
    variables = {
       "use-nav" => options.use-nav
@@ -108,14 +130,8 @@ install{@, _options} =
             _name
       variables['font-{location}'] = name
 
-   extra-sheet =
-      if options.extra:
-         @read-resource-text{.resource, options.extra}
-      else:
-         ""
-
    res = node-sass.render-sync{
-      data = common-sheet + varpfx.join{"\n"} + sass-sheet + extra-sheet
+      data = sheets.common + varpfx.join{"\n"} + sass-sheet + sheets.extra
       indented-syntax = true
    } where
       varpfx = items{variables} each {k, v} -> '${k}: {v}'
@@ -179,7 +195,8 @@ install{@, _options} =
 main{*match} =
    {@, options = {=}} when @is-quaint-engine ->
       install{@, options}
-   {options = {=}} ->
+   {_options = {=}} ->
+      options = read-sheets{null, _options}
       {@} -> main{@, options}
 
 provide = main
