@@ -8,11 +8,9 @@ require:
    deepmerge
    postcss
    autoprefixer
-   inquirer-promise as inq
-   chalk
 
 provide:
-   quaint-setup
+   defaults
 
 
 read-sheets{@, options} =
@@ -205,53 +203,4 @@ main{*match} =
       {@} -> main{@, options}
 
 provide = main
-
-
-
-async quaint-setup{config, instructions} =
-
-   url = "https://github.com/breuleux/quaint-look-nice"
-   print 'Documentation for quaint-look-nice: {chalk.bold.cyan{url}}'
-
-   if config.templates.default !== "@nav":
-      uset = await inq.confirm{"Set the @nav template as default?", {default = true}}
-      if uset:
-         config.templates.default = "@nav"
-
-   v = config.plugins["look-nice"]
-   prev-cfg = v != true and v != {=}
-   choices = {
-      if{prev-cfg, "Keep current configuration.", "Nothing."}
-      "Important settings."
-      "All settings."
-   }
-   var default = 1
-   if prev-cfg:
-      choices.push{"Clear."}
-      default = 0
-
-   which-config = await inq.list{m, choices, {= default}} where
-      m = "Which settings should I save in the configuration file? (You can edit them in quaint.json afterwards)"
-   match choices.index-of{which-config}:
-      0 -> pass
-      1 -> config.plugins["look-nice"] = {
-         fonts = {
-            body = "sans"
-            nav = "$font-body"
-            header = "$font-body"
-         }
-         font-sizes = {
-            body = "20px"
-            nav = "$font-size-body"
-         }
-         widths = {
-            body = "700px"
-         }
-         backgrounds = {
-            body = "#fff"
-            nav = "$background-body"
-         }
-      }
-      2 -> config.plugins["look-nice"] = defaults
-      3 -> config.plugins["look-nice"] = {=}
 
