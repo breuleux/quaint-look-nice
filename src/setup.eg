@@ -8,7 +8,7 @@ require:
 async quaint-setup{config, instructions} =
 
    url = "https://github.com/breuleux/quaint-look-nice"
-   print 'Documentation for quaint-look-nice: {chalk.bold.cyan{url}}'
+   print 'Plugin documentation: {chalk.bold.cyan{url}}'
 
    if config.templates.default !== "@nav":
       uset = await inq.confirm{"Set the @nav template as default?", {default = true}}

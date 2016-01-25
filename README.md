@@ -7,7 +7,7 @@ A not-too-bad-looking theme for Quaint.
 
 ## Install
 
-    npm install quaint-look-nice -g
+    quaint --setup look-nice
 
 
 ## Sample configuration
