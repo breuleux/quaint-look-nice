@@ -1,6 +1,6 @@
 {
   "name": "quaint-look-nice",
-  "description": "A simple CSS sheet for use with Quaint. It looks nice!",
+  "description": "A simple CSS/SASS sheet for use with Quaint. It looks nice!",
   "version": "0.0.0",
   "format": "cjs",
   "repository": {
@@ -10,6 +10,7 @@
   "keywords": [
     "quaint",
     "quaint-plugin",
+    "sass",
     "css",
     "stylesheet"
   ],
@@ -21,11 +22,11 @@
     "chalk": "^1.1.1",
     "deepmerge": "^0.2.10",
     "earlgrey-runtime": ">=0.0.11",
-    "inquirer-promise": "0.0.0",
+    "inquirer-promise": ">=0.0.3",
     "node-sass": "^3.4.2",
     "postcss": "^5.0.13",
     "quaint-google-fonts": ">=0.0.0",
-    "quaint-nav": ">=0.0.0"
+    "quaint-nav": ">=0.0.1"
   },
   "devDependencies": {
     "earlgrey": ">=0.0.13",
