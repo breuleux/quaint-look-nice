@@ -26,9 +26,10 @@
     "node-sass": "^3.4.2",
     "postcss": "^5.0.13",
     "quaint-google-fonts": ">=0.0.0",
-    "quaint-nav": ">=0.0.1"
+    "quaint-nav": ">=0.0.2"
   },
   "devDependencies": {
+    "quaint": ">=0.0.15",
     "earlgrey": ">=0.0.13",
     "mocha": "^2.2.1",
     "earl-mocha": ">=0.0.3"
