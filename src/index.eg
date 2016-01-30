@@ -39,6 +39,7 @@ defaults = {
    widths = {
       body = "700px"
       nav = "$width-body + 2 * $padding-body"
+      side = "300px"
    }
    paddings = {
       body = "10px"
@@ -118,6 +119,22 @@ install{@, _options} =
          }
       }
 
+   if options.use-side:
+      @register-resources with {
+         "look-nice/side.sass" => {
+            path = path.join{__dirname, "../sass/side.sass"}
+            contents = true
+            type = .sass
+            method = .head
+         }
+         "look-nice/toc-scroll.js" => {
+            path = path.join{__dirname, "../js/toc-scroll.js"}
+            contents = true
+            type = .js
+            method = .head
+         }
+      }
+
    @register-resources with {
       "look-nice/main.sass" => {
          path = path.join{__dirname, "../sass/main.sass"}
@@ -164,6 +181,9 @@ install{@, _options} =
                      span.icon-bar %
                   quaint-nav.dump-nav{engine, "mobile-menu", ulonly = true}
                quaint-nav.dump-nav{engine, "mobile"}
+            if options.use-side:
+               then: #side % quaint-nav.dump-nav{engine, "side"}
+               else: ""
          }
    }
 
