@@ -18,12 +18,12 @@ read-sheets{@, options} =
       options
    else:
       read-file = options.read-file or [[@] and [x -> @read-resource-text{.resource, x}]]
-      style-root = path.join{__dirname, "../style"}
+      style-root = path.join{__dirname, "../sass"}
       if read-file:
          options & {
             _sheets = {
                common = read-file{path.join{style-root, "_common.sass"}}
-               main = read-file{path.join{style-root, "nice.sass"}}
+               main = read-file{path.join{style-root, "main.sass"}}
                nav = read-file{path.join{style-root, "nav.sass"}}
                extra =
                   if options.extra as x:
@@ -145,14 +145,14 @@ install{@, _options} =
    quaint-nav{@}
 
    @register-resources with {
-      "style/nice.css" => {
+      "style/main.css" => {
          path = null
          contents = sheet
          type = .css
          method = .head
       }
       "js/nav.js" => {
-         path = path.join{__dirname, "../client/nav.js"}
+         path = path.join{__dirname, "../js/nav.js"}
          contents = true
          type = .js
          method = .head
