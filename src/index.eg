@@ -1,39 +1,41 @@
 
 require:
+   quaint-autoprefixer
    quaint-google-fonts
    quaint-nav
+   quaint-sass
    path
    fs
-   node-sass
+   ;; node-sass
    deepmerge
-   postcss
-   autoprefixer
+   ;; postcss
+   ;; autoprefixer
 
 provide:
    defaults
 
 
-read-sheets{@, options} =
-   if options._sheets:
-      options
-   else:
-      read-file = options.read-file or [[@] and [x -> @read-resource-text{.resource, x}]]
-      style-root = path.join{__dirname, "../sass"}
-      if read-file:
-         options & {
-            _sheets = {
-               common = read-file{path.join{style-root, "_common.sass"}}
-               main = read-file{path.join{style-root, "main.sass"}}
-               nav = read-file{path.join{style-root, "nav.sass"}}
-               extra =
-                  if options.extra as x:
-                     read-file{x}
-                  else:
-                     ""
-            }
-         }
-      else:
-         options
+;; read-sheets{@, options} =
+;;    if options._sheets:
+;;       options
+;;    else:
+;;       read-file = options.read-file or [[@] and [x -> @read-resource-text{.resource, x}]]
+;;       style-root = path.join{__dirname, "../sass"}
+;;       if read-file:
+;;          options & {
+;;             _sheets = {
+;;                common = read-file{path.join{style-root, "_common.sass"}}
+;;                main = read-file{path.join{style-root, "main.sass"}}
+;;                nav = read-file{path.join{style-root, "nav.sass"}}
+;;                extra =
+;;                   if options.extra as x:
+;;                      read-file{x}
+;;                   else:
+;;                      ""
+;;             }
+;;          }
+;;       else:
+;;          options
 
 
 nav-template = """
@@ -103,18 +105,20 @@ defaults = {
 install{@, _options} =
 
 
-   options = read-sheets{@, deepmerge{defaults, _options}}
-   sheets = options._sheets
-   var sass-sheet = sheets.main
+   ;; options = read-sheets{@, deepmerge{defaults, _options}}
+   ;; sheets = options._sheets
+   ;; var sass-sheet = sheets.main
+
+   options = deepmerge{defaults, _options}
 
    if options.font:
       options.fonts.body = options.font
 
-   if options.use-nav:
-      sass-sheet += sheets.nav
+   ;; if options.use-nav:
+   ;;    sass-sheet += sheets.nav
 
    variables = {
-      "use-nav" => options.use-nav
+      "use-nav" => options.use-nav or false
    }
 
    google-fonts = options.google-fonts or {}
@@ -133,31 +137,53 @@ install{@, _options} =
             _name
       variables['font-{location}'] = name
 
-   res = node-sass.render-sync{
-      data = sheets.common + varpfx.join{"\n"} + sass-sheet + sheets.extra
-      indented-syntax = true
-   } where
-      varpfx = items{variables} each {k, v} -> '${k}: {v}'
+   ;; res = node-sass.render-sync{
+   ;;    data = sheets.common + varpfx.join{"\n"} + sass-sheet + sheets.extra
+   ;;    indented-syntax = true
+   ;; } where
+   ;;    varpfx = items{variables} each {k, v} -> '${k}: {v}'
 
-   sheet = postcss{{autoprefixer}}.process{res.css.to-string{}}.css
+   ;; sheet = postcss{{autoprefixer}}.process{res.css.to-string{}}.css
 
+   quaint-autoprefixer{@}
    quaint-google-fonts{@, fonts = google-fonts}
    quaint-nav{@}
+   sass-definitions = fs.read-file-sync{path.join{__dirname, "../sass/_common.sass"}, .utf8}
+   quaint-sass{@, {= sass-definitions, = variables}}
+
+   if options.use-nav:
+      @register-resources with {
+         "look-nice/nav.sass" => {
+            path = path.join{__dirname, "../sass/nav.sass"}
+            contents = true
+            type = .sass
+            method = .head
+         }
+      }
 
    @register-resources with {
-      "style/main.css" => {
-         path = null
-         contents = sheet
-         type = .css
+      ;; "style/main.css" => {
+      ;;    path = null
+      ;;    contents = sheet
+      ;;    type = .css
+      ;;    method = .head
+      ;; }
+
+
+      "look-nice/main.sass" => {
+         path = path.join{__dirname, "../sass/main.sass"}
+         contents = true
+         type = .sass
          method = .head
       }
-      "js/nav.js" => {
+      
+      "look-nice/nav.js" => {
          path = path.join{__dirname, "../js/nav.js"}
          contents = true
          type = .js
          method = .head
       }
-      "js/nav.js/install" => {
+      "look-nice/nav.js/install" => {
          path = null
          contents = "$$quaintNavFunctionality()"
          type = .js
@@ -198,8 +224,8 @@ install{@, _options} =
 main{*match} =
    {@, options = {=}} when @is-quaint-engine ->
       install{@, options}
-   {_options = {=}} ->
-      options = read-sheets{null, _options}
+   {options = {=}} ->
+      ;; options = read-sheets{null, _options}
       {@} -> main{@, options}
 
 provide = main

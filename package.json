@@ -18,15 +18,14 @@
   "license": "MIT",
   "main": "./lib/index.js",
   "dependencies": {
-    "autoprefixer": "^6.1.2",
     "chalk": "^1.1.1",
     "deepmerge": "^0.2.10",
-    "earlgrey-runtime": ">=0.0.11",
+    "earlgrey-runtime": ">=0.0.12",
     "inquirer-promise": ">=0.0.3",
-    "node-sass": "^3.4.2",
-    "postcss": "^5.0.13",
+    "quaint-autoprefixer": ">=0.0.0",
     "quaint-google-fonts": ">=0.0.0",
-    "quaint-nav": ">=0.0.2"
+    "quaint-nav": ">=0.0.2",
+    "quaint-sass": ">=0.0.2"
   },
   "devDependencies": {
     "quaint": ">=0.0.15",
