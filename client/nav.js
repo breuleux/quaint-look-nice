@@ -13,7 +13,7 @@ function $$quaintNavFunctionality() {
     for (var i = 0; i < dropdowns.length; i++) {
         (function (_elem) {
             var elem = _elem.childNodes[0];
-            elem.onclick = elem.ontouchend = function (e) {
+            elem.ontouchend = function (e) {
                 e.stopPropagation();
                 e.preventDefault();
                 toggleActive(_elem);
