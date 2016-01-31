@@ -41,6 +41,9 @@ defaults = {
       nav = "$width-body + 2 * $padding-body"
       side = "300px"
    }
+   heights = {
+      nav = "50px"
+   }
    paddings = {
       body = "10px"
       nav = "$padding-body"
@@ -90,7 +93,7 @@ install{@, _options} =
    google-fonts = options.google-fonts or {}
 
    {.background, .color, "font-size"
-    .border, .padding, .margin, .width} each type ->
+    .border, .padding, .margin, .width, .height} each type ->
       items{options['{type}s'] or {=}} each {location, value} ->
          variables['{type}-{location}'] = value
 
@@ -182,7 +185,11 @@ install{@, _options} =
                   quaint-nav.dump-nav{engine, "mobile-menu", ulonly = true}
                quaint-nav.dump-nav{engine, "mobile"}
             if options.use-side:
-               then: #side % quaint-nav.dump-nav{engine, "side"}
+               then:
+                  quaint-nav.dump-nav{engine, "side"} with {
+                     suppress-empty-nav = true
+                     wrap{x} = #side % x
+                  }
                else: ""
          }
    }

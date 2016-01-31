@@ -8,6 +8,11 @@
   font-family: "\"" + $font-nav + "\""
   box-sizing: border-box
 
+
+.nav-container-desktop
+  height: $height-nav
+
+
 .nav-main, .nav-leftmost, .nav-rightmost, .nav-mobile
   > ul
     @include row
@@ -39,7 +44,7 @@
       a
         display: inline-block
         width: 100%
-        height: 100%
+        /* height: 100%
         color: inherit
       a:hover
         background-color: $background-nav-select
@@ -54,12 +59,19 @@
   font-size: $font-size-nav
   justify-content: space-between
 
+  nav > ul > li
+    box-sizing: border-box
+    height: $height-nav
+    > :first-child
+      line-height: $height-nav
+      padding: 5px 10px
+
   nav
     li
       @include row
       margin: 0px
-      > *
-        padding: 5px 10px
+    li > *
+      padding: 5px 10px
 
     .dropdown
       a:hover
