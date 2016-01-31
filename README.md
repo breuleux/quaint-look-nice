@@ -23,19 +23,12 @@ This configuration entry must be added in the `plugins` field of
   },
   "backgrounds": {
     "nav": "purple"
-  },
-  "extra": "your-style.sass"
+  }
 }
 ```
 
 
 ## Options
-
-### extra
-
-Path to a user-defined `sass` file (indented syntax). That code will
-have access to all the variables defined by `quaint-look-nice` and can
-be used for customization. It is appended at the very end.
 
 ### useNav
 
@@ -44,7 +37,21 @@ be used for customization. It is appended at the very end.
 Whether to use a navbar or not. If false, the navbar style will not be
 copied.
 
-### fonts, font-sizes, borders, widths, paddings, backgrounds, colors
+### useNav
+
+(default: true)
+
+Whether to use a navbar or not. If false, the navbar style will not be
+copied.
+
+### useSide
+
+(default: true)
+
+Whether to use the side navigation or not. If false, the sidenav style
+will not be copied.
+
+### fonts, font-sizes, borders, widths, heights, paddings, backgrounds, colors
 
 These maps define variables with the corresponding prefixes
 (`font-xyz`, `font-size-xyz`, and so on).
@@ -94,7 +101,11 @@ the color is dark. `darken` and `lighten` are self-explanatory.
    },
    "widths": {
       "body": "700px",
-      "nav": "$width-body + 2 * $padding-body"
+      "nav": "$width-body + 2 * $padding-body",
+      "side": "300px"
+   },
+   "heights": {
+      "nav": "50px"
    },
    "paddings": {
       "body": "10px",
