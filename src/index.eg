@@ -18,6 +18,8 @@ lnnav :: dump!
 """
 
 defaults = {
+   use-nav = true
+   use-side = true
    fonts = {
       body = "sans"
       nav = "$font-body"
@@ -87,7 +89,7 @@ install{@, _options} =
       options.fonts.body = options.font
 
    variables = {
-      "use-nav" => options.use-nav or false
+      "use-nav" => options.use-nav
    }
 
    google-fonts = options.google-fonts or {}
