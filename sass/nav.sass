@@ -64,14 +64,15 @@
     height: $height-nav
     > :first-child
       line-height: $height-nav
-      padding: 5px 10px
+      /* padding: 5px 10px
 
   nav
     li
       @include row
       margin: 0px
     li > *
-      padding: 5px 10px
+      box-sizing: border-box
+      padding: 0px 10px 0px 10px
 
     .dropdown
       a:hover
@@ -97,6 +98,10 @@
         color: $color-nav-dropdown
         min-width: 200px
         font-size: $font-size-dropdown
+
+      li > *
+        padding-top: 5px
+        padding-bottom: 5px
 
   .nav-main
     margin: auto
