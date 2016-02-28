@@ -108,7 +108,13 @@ div.error
 
 /* DESKTOP
 
-@media screen and (min-device-aspect-ratio: 100/99)
+body
+  font-size: $font-size-body
+pre
+  font-size: 80%
+
+/* @media screen and (min-device-aspect-ratio: 100/99)
+@media screen and (min-width: 800px)
   @if $use-nav
     .container
       max-width: $width-body
@@ -117,30 +123,27 @@ div.error
     body
       max-width: $width-body
       padding: 0 $padding-body
-
-  body
-    font-size: $font-size-body
-  pre
-    font-size: 80%
 
 /* MOBILE
 
-@media screen and (max-device-aspect-ratio: 99/100)
-  pre
-    font-size: 1.7rem
-  table
-    font-size: 2rem
+/* @media screen and (max-device-aspect-ratio: 99/100)
+@media screen and (max-width: 800px)
+  /* pre
+  /*   font-size: 1.7rem
+  /* table
+  /*   font-size: 2rem
   @if $use-nav
     .container
-      padding: 0 50px
+      max-width: $width-body
+      padding: 0 $padding-body
   @else
     body
-      padding: 0 50px
-    padding: 0 $padding-body
-  h1
-    font-size: 4rem
-  h2
-    font-size: 2.5rem
-  h3
-    font-size: 1.5rem
+      max-width: $width-body
+      padding: 0 $padding-body
+  /* h1
+  /*   font-size: 4rem
+  /* h2
+  /*   font-size: 2.5rem
+  /* h3
+  /*   font-size: 1.5rem
 

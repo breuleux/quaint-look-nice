@@ -27,12 +27,17 @@
 .hamburger
   @include column
   justify-content: space-between
-  height: 1.7em
-  padding: 10px
+  /* height: 1.7em
+  height: 1.5em
+  padding: 0.3em
+  box-sizing: border-box
 
 .icon-bar
   display: block
   background-color: bwtext($background-nav)
+  width: 1em
+  height: 2px
+  border-radius: 2px
 
 
 
@@ -149,16 +154,8 @@
   /*   width: 100%
 
   @include row
-  font-size: $font-size-nav * 3
-
-  .icon-bar
-    width: 75px
-    height: 5px
-    border-radius: 2px
-
-  .hamburger
-    box-sizing: border-box
-    padding: 20px
+  font-size: $font-size-mnav
+  height: $height-mnav
 
   .nav-mobile-menu.dropdown
     position: relative
@@ -185,7 +182,7 @@
       position: relative
       > .caret:after
         position: absolute
-        font-size: $font-size-caret * 5
+        font-size: $font-size-caret
         margin-left: 10px
         right: 10px
         top: -20px
@@ -207,18 +204,18 @@
       background: $background-nav
       color: $color-nav
       list-style-type: none
-      font-size: $font-size-dropdown * 3
+      font-size: $font-size-dropdown
       > li
         width: 100%
         > :first-child
-          padding-left: 20px
-          padding-top: 20px
-          padding-bottom: 20px
+          padding-left: 10px
+          padding-top: 10px
+          padding-bottom: 10px
         > a
-          padding: 20px 0px
-        border-left: 20px solid $background-nav-dropdown-select
+          padding: 10px 0px
+        border-left: 10px solid $background-nav-dropdown-select
         > ul
-          border-left: 20px solid $background-nav-dropdown-select
+          border-left: 10px solid $background-nav-dropdown-select
 
     .dropdown > ul
       top: 100%
@@ -238,11 +235,21 @@
     width: 100%
 
 
-@media screen and (max-device-aspect-ratio: 99/100)
+/* @media screen and (max-device-aspect-ratio: 99/100)
+/*   .nav-container-desktop
+/*     display: none
+
+
+/* @media screen and (min-device-aspect-ratio: 100/99)
+/*   .nav-container-mobile
+/*     display: none
+
+
+@media screen and (max-width: 800px)
   .nav-container-desktop
     display: none
 
 
-@media screen and (min-device-aspect-ratio: 100/99)
+@media screen and (min-width: 800px)
   .nav-container-mobile
     display: none

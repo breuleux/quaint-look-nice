@@ -11,6 +11,23 @@ require:
 provide:
    defaults
 
+min-template = """
+doctype :: html
+html %
+  head %
+    title %
+      meta::title !! Untitled
+    meta %
+      http-equiv = Content-type
+      content = text/html
+      charset = UTF-8
+    meta %
+      name = viewport
+      content = width=device-width
+      initial-scale = 1
+  body % {body}
+"""
+
 nav-template = """
 template :: @minimal
 lnnav :: dump!
@@ -23,6 +40,7 @@ defaults = {
    fonts = {
       body = "sans"
       nav = "$font-body"
+      mnav = "$font-nav"
       header = "$font-body"
       title = "$font-header"
       pre = "Monospace"
@@ -45,6 +63,7 @@ defaults = {
    }
    heights = {
       nav = "50px"
+      mnav = "$height-nav"
    }
    paddings = {
       body = "10px"
@@ -164,6 +183,7 @@ install{@, _options} =
 
    @register-resolvers with {
       template = {
+         "@minimal" => min-template
          "@nav" => nav-template
       }
    }
