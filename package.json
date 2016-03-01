@@ -24,7 +24,7 @@
     "inquirer-promise": ">=0.0.3",
     "quaint-autoprefixer": ">=0.0.0",
     "quaint-google-fonts": ">=0.0.0",
-    "quaint-nav": ">=0.0.3",
+    "quaint-nav": ">=0.0.4",
     "quaint-sass": ">=0.0.2"
   },
   "devDependencies": {
