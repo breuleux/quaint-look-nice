@@ -92,6 +92,7 @@ the color is dark. `darken` and `lighten` are self-explanatory.
    "font-sizes": {
       "body": "20px",
       "nav": "$font-size-body",
+      "mnav": "$font-size-nav",
       "dropdown": "$font-size-body",
       "caret": "$font-size-nav * 0.8"
    },
@@ -105,7 +106,8 @@ the color is dark. `darken` and `lighten` are self-explanatory.
       "side": "300px"
    },
    "heights": {
-      "nav": "50px"
+      "nav": "50px",
+      "mnav": "$height-nav"
    },
    "paddings": {
       "body": "10px",
@@ -130,8 +132,8 @@ the color is dark. `darken` and `lighten` are self-explanatory.
       "nav-select": "bwtext($background-nav-select)",
       "nav-dropdown": "bwtext($background-nav-dropdown)",
       "nav-dropdown-select": "bwtext($background-nav-dropdown-select)",
-      "link": "contrasting($background-body, #aaf, #00f)",
-      "link-visited": "contrasting($background-body, #f8f, #808)",
+      "link": "contrasting($background-body, #aaf, auto)",
+      "link-visited": "contrasting($background-body, #f8f, auto)",
       "pre": "bwtext($background-pre)",
       "code": "bwtext($background-code)",
       "table": "bwtext($background-table)",
