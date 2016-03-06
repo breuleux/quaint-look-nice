@@ -49,6 +49,7 @@ defaults = {
    "font-sizes" = {
       body = "20px"
       nav = "$font-size-body"
+      mnav = "$font-size-body"
       dropdown = "$font-size-body"
       caret = "$font-size-nav * 0.8"
    }
