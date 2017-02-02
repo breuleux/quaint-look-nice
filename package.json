@@ -20,18 +20,18 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "deepmerge": "^0.2.10",
-    "earlgrey-runtime": ">=0.0.12",
-    "inquirer-promise": ">=0.0.3",
-    "quaint-autoprefixer": ">=0.0.0",
-    "quaint-google-fonts": ">=0.0.0",
-    "quaint-nav": ">=0.0.4",
-    "quaint-sass": ">=0.0.2"
+    "earlgrey-runtime": "^0.1.0",
+    "inquirer-shortcuts": "^1.1.0",
+    "quaint-autoprefixer": "^0.1.1",
+    "quaint-google-fonts": "^0.1.0",
+    "quaint-nav": "^0.1.0",
+    "quaint-sass": "^0.1.0"
   },
   "devDependencies": {
-    "quaint": ">=0.0.15",
-    "earlgrey": ">=0.0.13",
+    "earl-mocha": ">=0.0.3",
+    "earlgrey": "^0.1.0",
     "mocha": "^2.2.1",
-    "earl-mocha": ">=0.0.3"
+    "quaint": ">=0.0.15"
   },
   "scripts": {
     "refresh": "earl compile -5vso lib/ src/",
