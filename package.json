@@ -25,7 +25,7 @@
     "quaint-autoprefixer": "^0.1.1",
     "quaint-google-fonts": "^0.1.0",
     "quaint-nav": "^0.1.0",
-    "quaint-sass": "^0.1.0"
+    "quaint-sass": "^0.2.0"
   },
   "devDependencies": {
     "earl-mocha": ">=0.0.3",
