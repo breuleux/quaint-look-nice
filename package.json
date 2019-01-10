@@ -1,7 +1,7 @@
 {
   "name": "quaint-look-nice",
   "description": "A simple CSS/SASS sheet for use with Quaint. It looks nice!",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "format": "cjs",
   "repository": {
     "type": "git",
